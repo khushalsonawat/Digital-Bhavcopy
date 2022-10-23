@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+  </head>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+  </style>
+  <body>
+    <form method="POST">
+      {%csrf_token%} {{form.as_p}}
+      <input type="submit" value="Search" />
+      <br /><br />
+      <table>
+        <tr>
+          {% for field in symbol_fields %}
+          <th>{{field}}</th>
+          {% endfor %}
+        </tr>
+        {% for company in symbol%}
+        <tr>
+          <td>{{company.symbol}}</td>
+          <td>{{company.company_name}}</td>
+          <td>{{company.series}}</td>
+          <td>{{company.listing_date}}</td>
+          <td>{{company.paid_up_value}}</td>
+          <td>{{company.market_lot}}</td>
+          <td>{{company.isin_number}}</td>
+          <td>{{company.face_value}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      <br />
+      <table>
+        <tr>
+          {%for field in security_fields%}
+          <th>{{field}}</th>
+          {%endfor%}
+        </tr>
+        {%for security in securities%}
+        <tr>
+          <td>{{security.market}}</td>
+          <td>{{security.series}}</td>
+          <td>{{security.symbol.symbol}}</td>
+          <td>{{security.security}}</td>
+          <td>{{security.prev_cl_price}}</td>
+          <td>{{security.open_price}}</td>
+          <td>{{security.high_price}}</td>
+          <td>{{security.low_price}}</td>
+          <td>{{security.close_price}}</td>
+          <td>{{security.net_tradeval}}</td>
+          <td>{{security.net_tradeqty}}</td>
+          <td>{{security.ind_sec}}</td>
+          <td>{{security.corp_ind}}</td>
+          <td>{{security.trades}}</td>
+          <td>{{security.high_52_wk}}</td>
+          <td>{{security.low_52_wk}}</td>
+        </tr>
+        {% endfor %}
+      </table>
+    </form>
+  </body>
+</html>
